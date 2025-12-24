@@ -83,7 +83,15 @@ async function createTicket(interaction, type) {
                 .setEmoji('➕')
         );
 
-    await channel.send({ content: `${user}`, embeds: [embed], components: [row] });
+    try {
+        await channel.send({ content: `${user}`, embeds: [embed], components: [row] });
+        console.log(`✅ Ticket initialized for ${user.tag} in channel ${channel.name}`);
+    } catch (err) {
+        console.error(`❌ Failed to send initial message in ${channel.name}:`, err);
+        // Clean up checking
+        // await channel.delete(); 
+        // throw err;
+    }
 
     return channel;
 }
