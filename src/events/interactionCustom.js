@@ -5,9 +5,15 @@ module.exports = {
     async execute(interaction) {
         if (interaction.isStringSelectMenu()) {
             if (interaction.customId === 'ticket_create_select') {
-                const type = interaction.values[0];
-                const channel = await createTicket(interaction, type);
-                await interaction.reply({ content: `Ticket created: ${channel}`, ephemeral: true });
+                await interaction.deferReply({ ephemeral: true });
+                try {
+                    const type = interaction.values[0];
+                    const channel = await createTicket(interaction, type);
+                    await interaction.editReply({ content: `✅ Ticket created: ${channel}` });
+                } catch (error) {
+                    console.error(error);
+                    await interaction.editReply({ content: '❌ Failed to create ticket. Please contact an administrator.' });
+                }
             }
         } else if (interaction.isButton()) {
             if (interaction.customId === 'ticket_close') {
