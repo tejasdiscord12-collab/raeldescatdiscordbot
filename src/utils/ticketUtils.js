@@ -62,14 +62,19 @@ async function createTicket(interaction, type) {
         .addComponents(
             new ButtonBuilder()
                 .setCustomId('ticket_close')
-                .setLabel('Close Ticket')
+                .setLabel('Close')
                 .setStyle(ButtonStyle.Danger)
                 .setEmoji('🔒'),
             new ButtonBuilder()
                 .setCustomId('ticket_claim')
-                .setLabel('Claim Ticket')
+                .setLabel('Claim')
+                .setStyle(ButtonStyle.Success)
+                .setEmoji('🙋‍♂️'),
+            new ButtonBuilder()
+                .setCustomId('ticket_more')
+                .setLabel('More Options')
                 .setStyle(ButtonStyle.Secondary)
-                .setEmoji('✋')
+                .setEmoji('➕')
         );
 
     await channel.send({ content: `${user}`, embeds: [embed], components: [row] });

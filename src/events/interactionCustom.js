@@ -19,8 +19,10 @@ module.exports = {
             if (interaction.customId === 'ticket_close') {
                 await closeTicket(interaction);
             } else if (interaction.customId === 'ticket_claim') {
-                await interaction.reply({ content: 'Ticket claimed!', ephemeral: true });
-                // Add claim logic here (rename channel, add claiming user to permissions, etc.)
+                await interaction.reply({ content: `✅ Ticket claimed by ${interaction.user}!`, ephemeral: false });
+                // Future: Add logic to update channel topic or permissions
+            } else if (interaction.customId === 'ticket_more') {
+                await interaction.reply({ content: '🔧 More options coming soon (Transcript, Add User, etc.)', ephemeral: true });
             }
         }
     },
