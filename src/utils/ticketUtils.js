@@ -51,7 +51,13 @@ async function createTicket(interaction, type) {
         type: type
     });
 
-    await ticket.save();
+    try {
+        await ticket.save();
+    } catch (err) {
+        // If DB fails, delete the channel so we don't have empty channels lying around
+        await channel.delete();
+        throw err; // Re-throw to be caught by interaction handler
+    }
 
     const embed = new EmbedBuilder()
         .setTitle('Ticket Created')

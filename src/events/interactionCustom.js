@@ -11,8 +11,8 @@ module.exports = {
                     const channel = await createTicket(interaction, type);
                     await interaction.editReply({ content: `✅ Ticket created: ${channel}` });
                 } catch (error) {
-                    console.error(error);
-                    await interaction.editReply({ content: '❌ Failed to create ticket. Please contact an administrator.' });
+                    console.error('Ticket Create Error:', error);
+                    await interaction.editReply({ content: `❌ Failed to create ticket.\n**Error:** ${error.message}` });
                 }
             }
         } else if (interaction.isButton()) {
